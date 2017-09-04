@@ -5,3 +5,49 @@
         .page-header
             h1 #{title}
             small small title
+.navbar.navbar-default.navbar-fixed-bottom
+    .container
+        .navbar-header
+            a.navbar-brand(href="/") home
+        if user
+            p.navbar-text.navbar-right
+                span.navbar-link(href="#", data-toggle="modal", data-target="#signUpModal") Welcome #{user.name}!
+                span &nbsp;|&nbsp;
+                a.navbar-link(href="/logout") logout
+
+        else
+            p.navbar-text.navbar-right
+                a.navbar-link(href="#", data-toggle="modal", data-target="#signUpModal") signUp
+                span &nbsp;|&nbsp;
+                a.navbar-link(href="#", data-toggle="modal", data-target="#signInModal") signIn
+
+#signUpModal.modal.fade
+    .modal-dialog
+        .modal-content
+            form(method="POST", action="/user/signUp")
+                .modal-header sign up
+                .modal-body
+                    .form-group
+                        label(for="signUpName") userName
+                        input#signUpName.form-control(name="user[name]", type="text")
+                    .form-group
+                        label(for="signUpPassword") userName
+                        input#signUpPassword.form-control(name="user[password]", type="text")
+                .modal-footer
+                    button.btn.btn-default(type="button", data-dismiss="modal") close
+                    button.btn.btn-success(type="submit") submit
+#signInModal.modal.fade
+    .modal-dialog
+        .modal-content
+            form(method="POST", action="/user/signIn")
+                .modal-header sign up
+                .modal-body
+                    .form-group
+                        label(for="signInName") userName
+                        input#signInName.form-control(name="user[name]", type="text")
+                    .form-group
+                        label(for="signInPassword") userName
+                        input#signInPassword.form-control(name="user[password]", type="text")
+                .modal-footer
+                    button.btn.btn-default(type="button", data-dismiss="modal") close
+                    button.btn.btn-success(type="submit") submit
